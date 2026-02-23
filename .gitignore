@@ -1,0 +1,17 @@
+
+**/.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+
+
+*.tfplan
+
+
+*.tfvars
+
+
+lambda.zip
+
+
+.DS_Store
