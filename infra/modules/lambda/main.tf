@@ -3,6 +3,7 @@ resource "aws_lambda_function" "my_lambda" {
   function_name = var.function_name
   role          = var.role
   handler       = var.handler
+  source_code_hash = filebase64sha256(var.source_code_hash)
  
 
   runtime = var.runtime
