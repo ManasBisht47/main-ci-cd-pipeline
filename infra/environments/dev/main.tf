@@ -15,6 +15,8 @@ module "lambda"{
   function_name = "dev-lambda-function"
   role          = module.iam.lambda_role_arn
   handler       = "lambda.lambda_handler"
+  source_code_hash = "../../../lambda_func/lambda.zip"
+
  
 
   runtime = "python3.11"

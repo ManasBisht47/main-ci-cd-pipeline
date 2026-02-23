@@ -19,3 +19,7 @@ variable "handler"{
 variable "runtime"{
     type=string
 }
+
+variable "source_code_hash"{
+    type = string
+}
