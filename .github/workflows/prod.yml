@@ -24,13 +24,13 @@ jobs:
           aws-region: ap-south-1
 
       - name: Terraform Init
-        working-directory: infra/environment/prod
+        working-directory: infra/environments/prod
         run: terraform init
 
       - name: Terraform Plan
-        working-directory: infra/environment/prod
+        working-directory: infra/environments/prod
         run: terraform plan
 
       - name: Terraform Apply
-        working-directory: infra/environment/prod
+        working-directory: infra/environments/prod
         run: terraform apply -auto-approve
