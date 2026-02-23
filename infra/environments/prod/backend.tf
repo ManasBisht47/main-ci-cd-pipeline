@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "manas-data-pipeline"
-    key    = "qa/terraform.tfstate"
+    key    = "prod/terraform.tfstate"
     region = "ap-south-1"
   }
 }
