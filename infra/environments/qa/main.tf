@@ -15,6 +15,7 @@ module "lambda"{
   function_name = "qa-lambda-function"
   role          = module.iam.lambda_role_arn
   handler       = "lambda.lambda_handler"
+  source_code_hash = "../../../lambda_func/lambda.zip"
  
 
   runtime = "python3.11"
