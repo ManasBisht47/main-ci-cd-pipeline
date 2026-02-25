@@ -7,6 +7,7 @@ resource "aws_lambda_function" "my_lambda" {
  
 
   runtime = var.runtime
+  layers=[var.layers]
 }
 
 data "archive_file" "python_to_zip" {

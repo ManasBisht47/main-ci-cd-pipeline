@@ -23,3 +23,6 @@ variable "runtime"{
 variable "source_code_hash"{
     type = string
 }
+variable "layers"{
+    type = string
+}
