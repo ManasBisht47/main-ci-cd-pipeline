@@ -9,7 +9,7 @@ s3=boto3.client("s3")
 def lambda_handler(event, context):
 
 
-    url="https://jsonplaceholder.typicode.com/todos/1"
+    url="https://dummy-json.mock.beeceptor.com/users"
     response=u.urlopen(url)
     data=json.loads(response.read())
     df=pd.json_normalize(data)
