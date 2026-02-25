@@ -60,7 +60,7 @@ resource "snowflake_table" "clean_users" {
   }
 
    column {
-    name = "ZIP
+    name = "ZIP"
     type = "STRING"
   }
 
