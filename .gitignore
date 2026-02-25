@@ -8,7 +8,7 @@ crash.log
 *.tfplan
 
 
-*.tfvars
+# *.tfvars
 
 
 lambda.zip
