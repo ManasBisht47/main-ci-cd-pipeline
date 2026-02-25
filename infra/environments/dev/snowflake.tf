@@ -2,7 +2,7 @@
 
 provider "snowflake" {
   account_name=var.sf_account
-  username=var.sf_username
+  user=var.sf_username
   password=var.sf_password
   role="ACCOUNTADMIN"
 }
