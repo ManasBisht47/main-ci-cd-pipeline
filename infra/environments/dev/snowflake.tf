@@ -1,11 +1,4 @@
-terraform {
-  required_providers {
-    snowflake = {
-      source = "snowflakedb/snowflake"
-      version = "2.14.0"
-    }
-  }
-}
+
 
 provider "snowflake" {
   account=var.sf_account
