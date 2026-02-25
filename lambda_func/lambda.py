@@ -13,19 +13,20 @@ def lambda_handler(event, context):
     response=u.urlopen(url)
     data=json.loads(response.read())
     df=pd.json_normalize(data)
+    
     df['photo']=df['photo'].fillna("No photo")
     df["First_name"]=df['name'].str.split(" ").str[0]
     df["Last_name"]=df["name"].str.split(" ").str[1]
     df["Full_Address"]=df["address"]+","+df["state"]+","+df["country"]
     df['Country_is_USA']=df['country']=="USA"
 
-    df.to_json("cleaned_data.json", orient="records", lines=True)
+    cleaned_data= df.to_json(orient="records")
 
     s3=boto3.client('s3')
     s3.put_object(
         bucket="manabh",
         key="cleaned_data.json",
-        Body=open("cleaned_data.json", "rb")
+        Body=cleaned_data
     )
     s3.put_object(
         bucket="manabh",
