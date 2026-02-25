@@ -24,14 +24,15 @@ def lambda_handler(event, context):
 
     
     s3.put_object(
-        Bucket="manabh",
+        Bucket="main-manas-pipeline-storage",
         Key="cleaned_data.json",
         Body=cleaned_data
     )
     s3.put_object(
-        Bucket="manabh",
+        Bucket="main-manas-pipeline-storage",
         Key="raw_data.json",
         Body=json.dumps(data))
+    
 
         
     
