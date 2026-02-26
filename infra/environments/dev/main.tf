@@ -22,7 +22,7 @@ module "lambda" {
     environment_variables = {
     SF_USER     = var.sf_username
     SF_PASSWORD = var.sf_password
-    SF_ACCOUNT  = var.sf_account
+    SF_ACCOUNT  = var.sf_account_identity
 
   }
  
