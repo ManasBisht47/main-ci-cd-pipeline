@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - dev
+env:
+  TF_VAR_environment: dev
 
 jobs:
   terraform:
