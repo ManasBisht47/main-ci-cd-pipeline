@@ -62,4 +62,5 @@ module "allow_eventbridge" {
   function_name = module.lambda.lambda_name
   principal     = "events.amazonaws.com"
   source_arn    = aws_cloudwatch_event_rule.lambda_schedule.arn
+  description= "ALLOW EVENT BRIDGE INVOKE LAMBDA"
 }
