@@ -7,7 +7,7 @@ resource "aws_lambda_function" "my_lambda" {
  
 
   runtime = var.runtime
-  layers=[var.layers]
+  layers=var.layers
   environment {
   variables = var.environment_variables
 }
