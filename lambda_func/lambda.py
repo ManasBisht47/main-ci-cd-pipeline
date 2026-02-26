@@ -36,14 +36,27 @@ def lambda_handler(event, context):
         Key="raw_data.json",
         Body=json.dumps(data))
     
+
+    env = os.environ["ENV"]   
+
+  
+    warehouse = f"MANAS_{env.upper()}_WH"
+    database  = f"MANAS_{env.upper()}_DB"
+    role      = f"LAMBDA_{env.upper()}_ROLE"
+
+       
     conn = snowflake.connector.connect(
-        user=os.environ["SF_USER"],
-        password=os.environ["SF_PASSWORD"],
-        account=os.environ["SF_ACCOUNT"],
-        warehouse="MANAS_WH",
-        database="MANAS_DB",
-        schema="RAW"
-    )
+            user=os.environ["SF_USER"],
+            password=os.environ["SF_PASSWORD"],
+            account=os.environ["SF_ACCOUNT"],
+            warehouse=warehouse,
+            database=database,
+            schema="RAW",
+            role=role
+        )
+    
+    
+    
     cursor = conn.cursor()
     for index, row in df.iterrows():
         cursor.execute("""
