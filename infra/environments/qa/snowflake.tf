@@ -19,6 +19,7 @@ provider "snowflake" {
 
 
 
+
 resource "snowflake_warehouse" "wh" {
   name           = "MANAS_${upper(var.environment)}_WH"
   warehouse_size = "XSMALL"
