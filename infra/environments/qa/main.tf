@@ -1,6 +1,6 @@
 module "iam" {
   source      = "../../modules/iam"
-  environment = "dev"
+  environment = "${var.environment}"
 }
 
 module "s3" {

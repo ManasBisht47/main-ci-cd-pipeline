@@ -1,6 +1,6 @@
 module "iam" {
   source      = "../../modules/iam"
-  environment = "dev"
+  environment = "${var.environment}"
 }
 
 module "s3" {
@@ -19,7 +19,7 @@ module "lambda" {
   source_code_hash = "../../../lambda_func/lambda.zip"
   timeout=60
   layers           = ["arn:aws:lambda:ap-south-1:336392948345:layer:AWSSDKPandas-Python311:26",
-                      aws_lambda_layer_version.snowflake_layer.arn]
+                      module.snowflake_layer.layer_arn]
   runtime          = "python3.11"
     environment_variables = {
     SF_USER     = var.sf_username
@@ -30,14 +30,13 @@ module "lambda" {
  
 }
 module "snowflake_layer" {
-  source= "../../module/lambda_layer"
+  source= "../../modules/lambda_layer"
   filename   = "../../../snowflake-layer/snowflake_layer.zip"
+  environment="${var.environment}"
   
 
-  compatible_runtimes = ["python3.11"]
-  compatible_architectures = ["x86_64"]
 
-  source_code_hash = filebase64sha256("../../../snowflake-layer/snowflake_layer.zip")
+  source_code_hash = "../../../snowflake-layer/snowflake_layer.zip"
 }
 
 
