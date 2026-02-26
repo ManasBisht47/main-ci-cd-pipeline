@@ -30,7 +30,7 @@ module "lambda" {
  
 }
 module "snowflake_layer" {
-  source= "../../module/lambda_layer"
+  source= "../../modules/lambda_layer"
   filename   = "../../../snowflake-layer/snowflake_layer.zip"
   
 
