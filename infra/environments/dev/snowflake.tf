@@ -114,30 +114,42 @@ resource "snowflake_table" "clean_users" {
 }
 
 
-resource "snowflake_role" "lambda_role" {
+resource "snowflake_account_role" "lambda_role" {
   name = "LAMBDA_ROLE"
 }
 
-resource "snowflake_database_grant" "db_usage" {
-  database_name = snowflake_database.db.name
-  privilege     = "USAGE"
-  roles         = [snowflake_role.lambda_role.name]
+resource "snowflake_grant_privileges_to_account_role" "db_usage" {
+  privileges        = ["USAGE"]
+  account_role_name = snowflake_account_role.lambda_role.name
+
+  on_account_object {
+    object_type = "DATABASE"
+    object_name = snowflake_database.db.name
+  }
 }
-resource "snowflake_schema_grant" "schema_usage" {
-  database_name = snowflake_database.db.name
-  schema_name   = snowflake_schema.schema.name
-  privilege     = "USAGE"
-  roles         = [snowflake_role.lambda_role.name]
+resource "snowflake_grant_privileges_to_account_role" "schema_usage" {
+  privileges        = ["USAGE"]
+  account_role_name = snowflake_account_role.lambda_role.name
+
+  on_schema {
+    schema_name = "${snowflake_database.db.name}.${snowflake_schema.schema.name}"
+  }
 }
-resource "snowflake_table_grant" "table_insert" {
-  database_name = snowflake_database.db.name
-  schema_name   = snowflake_schema.schema.name
-  table_name    = snowflake_table.clean_users.name
-  privilege     = "INSERT"
-  roles         = [snowflake_role.lambda_role.name]
+resource "snowflake_grant_privileges_to_account_role" "table_insert" {
+  privileges        = ["INSERT"]
+  account_role_name = snowflake_account_role.lambda_role.name
+
+  on_schema_object {
+    object_type = "TABLE"
+    object_name = "${snowflake_database.db.name}.${snowflake_schema.schema.name}.${snowflake_table.clean_users.name}"
+  }
 }
-resource "snowflake_warehouse_grant" "warehouse_usage" {
-  warehouse_name = snowflake_warehouse.wh.name
-  privilege      = "USAGE"
-  roles          = [snowflake_role.lambda_role.name]
+resource "snowflake_grant_privileges_to_account_role" "warehouse_usage" {
+  privileges        = ["USAGE"]
+  account_role_name = snowflake_account_role.lambda_role.name
+
+  on_account_object {
+    object_type = "WAREHOUSE"
+    object_name = snowflake_warehouse.wh.name
+  }
 }
