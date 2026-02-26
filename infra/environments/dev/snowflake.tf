@@ -166,3 +166,8 @@ resource "snowflake_grant_privileges_to_account_role" "warehouse_usage" {
     object_name = snowflake_warehouse.wh.name
   }
 }
+
+resource "snowflake_grant_account_role" "grant_role_to_user" {
+  role_name = snowflake_account_role.lambda_role.name
+  user_name = var.sf_username
+}
