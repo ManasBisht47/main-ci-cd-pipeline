@@ -12,7 +12,7 @@ variable "arn"{
     type = string
 }
 
-variable "lambda_name'{
+variable "lambda_name"{
     type = string
 
 }
