@@ -16,6 +16,7 @@ module "lambda" {
   role             = module.iam.lambda_role_arn
   handler          = "lambda.lambda_handler"
   source_code_hash = "../../../lambda_func/lambda.zip"
+  timeout=60
   layers           = ["arn:aws:lambda:ap-south-1:336392948345:layer:AWSSDKPandas-Python311:26",
                       aws_lambda_layer_version.snowflake_layer.arn]
   runtime          = "python3.11"

@@ -33,8 +33,10 @@ variable "environment_variables" {
 }
 
 variable "timeout" {
-  
+
+  type = number
   default = 30
+
 }
 variable "memory_size" {
   
