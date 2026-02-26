@@ -5,14 +5,15 @@ module "iam" {
 
 module "s3" {
   source      = "../../modules/s3"
-  bucket_name = "dev-data-pipeline-manas2026"
-}
+  bucket_name = "${var.environment}-data-pipeline-manas2026"
+  }
+
 
 module "lambda" {
   source = "../../modules/lambda"
 
   filename         = "../../../lambda_func/lambda.zip"
-  function_name    = "dev-lambda-function"
+  function_name    = "${var.environment}-lambda-function"
   role             = module.iam.lambda_role_arn
   handler          = "lambda.lambda_handler"
   source_code_hash = "../../../lambda_func/lambda.zip"
@@ -28,9 +29,10 @@ module "lambda" {
   }
  
 }
-resource "aws_lambda_layer_version" "snowflake_layer" {
+module "snowflake_layer" {
+  source= "../../module/lambda_layer"
   filename   = "../../../snowflake-layer/snowflake_layer.zip"
-  layer_name = "snowflake-layer"
+  
 
   compatible_runtimes = ["python3.11"]
   compatible_architectures = ["x86_64"]
@@ -39,17 +41,23 @@ resource "aws_lambda_layer_version" "snowflake_layer" {
 }
 
 
-resource "aws_cloudwatch_event_rule" "lambda_schedule" {
-  name                = "daily-8pm-lambda-trigger"
+module  "lambda_schedule" {
+  source = "../../modules/eventbridge"
+  
   description         = "Trigger lambda daily at 8 PM IST"
   schedule_expression = "cron(30 14 * * ? *)"
 }
-resource "aws_cloudwatch_event_target" "lambda_target" {
+
+
+
+module "lambda_target" {
+  source = "../../modules/eventbridge"
   rule      = aws_cloudwatch_event_rule.lambda_schedule.name
   target_id = "lambda"
   arn       = module.lambda.lambda_arn
 }
-resource "aws_lambda_permission" "allow_eventbridge" {
+module "allow_eventbridge" {
+  source = "../../modules/eventbridge"
   statement_id  = "AllowExecutionFromEventBridge"
   action        = "lambda:InvokeFunction"
   function_name = module.lambda.lambda_name

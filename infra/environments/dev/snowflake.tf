@@ -16,14 +16,14 @@ provider "snowflake" {
 
 
 resource "snowflake_warehouse" "wh" {
-  name           = "MANAS_WH"
+  name           = "MANAS_${upper(var.environment)}_WH"
   warehouse_size = "XSMALL"
   auto_suspend   = 60
   auto_resume    = true
 }
 
 resource "snowflake_database" "db" {
-  name = "MANAS_DB"
+  name = "MANAS_${upper(var.environment)}_DB"
 }
 
 resource "snowflake_schema" "schema" {
@@ -121,7 +121,7 @@ resource "snowflake_table" "clean_users" {
 
 
 resource "snowflake_account_role" "lambda_role" {
-  name = "LAMBDA_ROLE"
+  name = "LAMBDA_${upper(var.environment)}_ROLE"
 }
 
 resource "snowflake_grant_privileges_to_account_role" "db_usage" {
@@ -133,6 +133,7 @@ resource "snowflake_grant_privileges_to_account_role" "db_usage" {
     object_name = snowflake_database.db.name
   }
 }
+
 resource "snowflake_grant_privileges_to_account_role" "schema_usage" {
   privileges        = ["USAGE"]
   account_role_name = snowflake_account_role.lambda_role.name
@@ -141,6 +142,7 @@ resource "snowflake_grant_privileges_to_account_role" "schema_usage" {
     schema_name = "${snowflake_database.db.name}.${snowflake_schema.schema.name}"
   }
 }
+
 resource "snowflake_grant_privileges_to_account_role" "table_insert" {
   privileges        = ["INSERT"]
   account_role_name = snowflake_account_role.lambda_role.name
@@ -150,6 +152,7 @@ resource "snowflake_grant_privileges_to_account_role" "table_insert" {
     object_name = "${snowflake_database.db.name}.${snowflake_schema.schema.name}.${snowflake_table.clean_users.name}"
   }
 }
+
 resource "snowflake_grant_privileges_to_account_role" "warehouse_usage" {
   privileges        = ["USAGE"]
   account_role_name = snowflake_account_role.lambda_role.name

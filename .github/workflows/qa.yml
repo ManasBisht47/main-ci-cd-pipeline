@@ -4,7 +4,8 @@ on:
   push:
     branches:
       - qa
-
+env:
+  TF_VAR_environment: qa
 jobs:
   terraform:
     runs-on: ubuntu-latest
