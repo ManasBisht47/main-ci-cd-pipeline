@@ -5,6 +5,7 @@ module "iam" {
 
 module "s3" {
   source      = "../../modules/s3"
+  
   bucket_name = "${var.environment}-data-pipeline-manas2026"
   }
 
@@ -25,6 +26,7 @@ module "lambda" {
     SF_USER     = var.sf_username
     SF_PASSWORD = var.sf_password
     SF_ACCOUNT  = var.sf_account_identity
+    ENV=var.environment
 
   }
  
