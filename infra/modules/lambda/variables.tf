@@ -24,7 +24,7 @@ variable "source_code_hash"{
     type = string
 }
 variable "layers"{
-    type = string
+    type = list(string)
 }
 
 variable "environment_variables" {
