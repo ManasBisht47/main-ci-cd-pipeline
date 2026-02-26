@@ -8,8 +8,7 @@ variable "schedule_expression"{
     type = string
 }
 
-variable "arn"
-{
+variable "arn"{
     type = string
 }
 
