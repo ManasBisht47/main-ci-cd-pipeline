@@ -31,3 +31,12 @@ variable "environment_variables" {
   type = map(string)
   default = {}
 }
+
+variable "timeout" {
+  
+  default = 30
+}
+variable "memory_size" {
+  
+  default = 512
+}

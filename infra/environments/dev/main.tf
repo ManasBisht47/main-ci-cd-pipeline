@@ -23,7 +23,10 @@ module "lambda" {
     SF_USER     = var.sf_username
     SF_PASSWORD = var.sf_password
     SF_ACCOUNT  = var.sf_account
+
   }
+  timeout=30
+  memory_size=512
 }
 resource "aws_lambda_layer_version" "snowflake_layer" {
   filename   = "../../../snowflake-layer/snowflake_layer.zip"
