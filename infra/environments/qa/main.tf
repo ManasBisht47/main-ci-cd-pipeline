@@ -32,6 +32,7 @@ module "lambda" {
 module "snowflake_layer" {
   source= "../../modules/lambda_layer"
   filename   = "../../../snowflake-layer/snowflake_layer.zip"
+  environment="${var.environment}"
   
 
 
