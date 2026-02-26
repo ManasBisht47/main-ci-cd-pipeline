@@ -37,3 +37,22 @@ resource "aws_lambda_layer_version" "snowflake_layer" {
 
   source_code_hash = filebase64sha256("../../../snowflake-layer/snowflake_layer.zip")
 }
+
+
+resource "aws_cloudwatch_event_rule" "lambda_schedule" {
+  name                = "daily-8pm-lambda-trigger"
+  description         = "Trigger lambda daily at 8 PM IST"
+  schedule_expression = "cron(30 14 * * ? *)"
+}
+resource "aws_cloudwatch_event_target" "lambda_target" {
+  rule      = aws_cloudwatch_event_rule.lambda_schedule.name
+  target_id = "lambda"
+  arn       = module.lambda.lambda_arn
+}
+resource "aws_lambda_permission" "allow_eventbridge" {
+  statement_id  = "AllowExecutionFromEventBridge"
+  action        = "lambda:InvokeFunction"
+  function_name = module.lambda.lambda_name
+  principal     = "events.amazonaws.com"
+  source_arn    = aws_cloudwatch_event_rule.daily_lambda_schedule.arn
+}
