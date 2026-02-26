@@ -41,26 +41,13 @@ module "snowflake_layer" {
 }
 
 
-module  "lambda_schedule" {
-  source = "../../modules/eventbridge"
-  
+module "event_bridge" {
+  source = "../../modules/event_bridge"
+
+  environment         = var.environment
   description         = "Trigger lambda daily at 8 PM IST"
   schedule_expression = "cron(30 14 * * ? *)"
-}
 
-
-
-module "lambda_target" {
-  source = "../../modules/eventbridge"
-  rule      = aws_cloudwatch_event_rule.lambda_schedule.name
-  target_id = "lambda"
-  arn       = module.lambda.lambda_arn
-}
-module "allow_eventbridge" {
-  source = "../../modules/eventbridge"
-  statement_id  = "AllowExecutionFromEventBridge"
-  action        = "lambda:InvokeFunction"
-  function_name = module.lambda.lambda_name
-  principal     = "events.amazonaws.com"
-  source_arn    = aws_cloudwatch_event_rule.lambda_schedule.arn
+  arn         = module.lambda.lambda_arn
+  lambda_name = module.lambda.lambda_name
 }
