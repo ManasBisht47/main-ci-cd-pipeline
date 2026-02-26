@@ -5,6 +5,7 @@ module "iam" {
 
 module "s3" {
   source      = "../../modules/s3"
+  
   bucket_name = "${var.environment}-data-pipeline-manas2026"
   }
 
