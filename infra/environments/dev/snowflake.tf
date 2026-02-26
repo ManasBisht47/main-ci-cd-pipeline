@@ -5,7 +5,8 @@ provider "snowflake" {
   organization_name=var.sf_org_name
   user=var.sf_username
   password=var.sf_password
-  role="ACCOUNTADMIN"
+  role="ACCOUNTADMIN"   
+  region  = "us-west-2"
 }
 
 
