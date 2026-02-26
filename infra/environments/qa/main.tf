@@ -34,8 +34,7 @@ module "snowflake_layer" {
   filename   = "../../../snowflake-layer/snowflake_layer.zip"
   
 
-  compatible_runtimes = ["python3.11"]
-  compatible_architectures = ["x86_64"]
+  
 
   source_code_hash = filebase64sha256("../../../snowflake-layer/snowflake_layer.zip")
 }
