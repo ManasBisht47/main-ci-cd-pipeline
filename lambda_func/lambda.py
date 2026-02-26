@@ -16,11 +16,12 @@ def lambda_handler(event, context):
     data=json.loads(response.read())
     df=pd.json_normalize(data)
 
-    df['photo']=df['photo'].fillna("No photo")
-    df["First_name"]=df['name'].str.split(" ").str[0]
-    df["Last_name"]=df["name"].str.split(" ").str[1]
-    df["Full_Address"]=df["address"]+","+df["state"]+","+df["country"]
-    df['Country_is_USA']=df['country']=="USA"
+    df['PHOTO']=df['photo'].fillna("No photo")
+    df["FIRST_NAME"]=df['name'].str.split(" ").str[0]
+    df["LAST_NAME"]=df["name"].str.split(" ").str[1]
+    df["FULL_ADDRESS"]=df["address"]+","+df["state"]+","+df["country"]
+    df['COUNTRY_IS_USA']=df['country']=="USA"
+    df["STATE_AND_COUNTRY"]=df["state"]+","+df["country"]
 
     cleaned_data= df.to_json(orient="records")
 
