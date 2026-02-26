@@ -26,3 +26,8 @@ variable "source_code_hash"{
 variable "layers"{
     type = string
 }
+
+variable "environment_variables" {
+  type = map(string)
+  default = {}
+}

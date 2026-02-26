@@ -9,15 +9,10 @@ provider "snowflake" {
    preview_features_enabled = [
     "snowflake_table_resource"
   ]
-   environment {
-    variables = {
-      sf_username    = var.sf_username 
-      sf_password = var.sf_password
-      sf_account = var.sf_account
-    }
+ 
   
 }
-}
+
 
 
 resource "snowflake_warehouse" "wh" {

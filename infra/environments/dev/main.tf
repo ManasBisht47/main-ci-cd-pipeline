@@ -18,4 +18,9 @@ module "lambda" {
   source_code_hash = "../../../lambda_func/lambda.zip"
   layers           = "arn:aws:lambda:ap-south-1:336392948345:layer:AWSSDKPandas-Python311:26"
   runtime          = "python3.11"
+    environment_variables = {
+    SF_USER     = var.sf_user
+    SF_PASSWORD = var.sf_password
+    SF_ACCOUNT  = var.sf_account
+  }
 }
