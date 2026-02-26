@@ -19,7 +19,7 @@ module "lambda" {
   source_code_hash = "../../../lambda_func/lambda.zip"
   timeout=60
   layers           = ["arn:aws:lambda:ap-south-1:336392948345:layer:AWSSDKPandas-Python311:26",
-                      aws_lambda_layer_version.snowflake_layer.arn]
+                      module.snowflake_layer.layer_arn]
   runtime          = "python3.11"
     environment_variables = {
     SF_USER     = var.sf_username
