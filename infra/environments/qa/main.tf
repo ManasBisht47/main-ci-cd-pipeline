@@ -36,7 +36,7 @@ module "snowflake_layer" {
   
 
 
-  source_code_hash = filebase64sha256("../../../snowflake-layer/snowflake_layer.zip")
+  source_code_hash = "../../../snowflake-layer/snowflake_layer.zip"
 }
 
 
