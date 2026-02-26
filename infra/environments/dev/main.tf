@@ -54,5 +54,5 @@ resource "aws_lambda_permission" "allow_eventbridge" {
   action        = "lambda:InvokeFunction"
   function_name = module.lambda.lambda_name
   principal     = "events.amazonaws.com"
-  source_arn    = aws_cloudwatch_event_rule.daily_lambda_schedule.arn
+  source_arn    = aws_cloudwatch_event_rule.lambda_schedule.arn
 }
