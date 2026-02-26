@@ -32,5 +32,5 @@ resource "aws_lambda_layer_version" "snowflake_layer" {
   compatible_runtimes = ["python3.11"]
   compatible_architectures = ["x86_64"]
 
-  source_code_hash = filebase64sha256(../../../snowflake-layer/snowflake_layer.zip")
+  source_code_hash = filebase64sha256("../../../snowflake-layer/snowflake_layer.zip")
 }
