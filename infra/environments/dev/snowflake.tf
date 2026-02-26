@@ -2,9 +2,13 @@
 
 provider "snowflake" {
   account_name=var.sf_account
+
   organization_name=var.sf_org_name
+
   user=var.sf_username
+
   password=var.sf_password
+  
   role="ACCOUNTADMIN"   
    preview_features_enabled = [
     "snowflake_table_resource"

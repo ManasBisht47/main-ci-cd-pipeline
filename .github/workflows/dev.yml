@@ -9,6 +9,11 @@ permissions:
   contents: read
 env:
   TF_VAR_environment: dev
+  TF_VAR_sf_username: ${{ secrets.SF_USERNAME }}
+  TF_VAR_sf_password: ${{ secrets.SF_PASSWORD }}
+  TF_VAR_sf_account: ${{ secrets.SF_ACCOUNT }}
+  TF_VAR_sf_org_name: ${{ secrets.SF_ORG }}
+  TF_VAR_sf_account_identity: ${{ secrets.SF_ACCOUNT_IDENTITY }}
 
 jobs:
   terraform:
